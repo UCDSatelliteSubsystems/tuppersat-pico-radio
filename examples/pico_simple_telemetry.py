@@ -1,28 +1,42 @@
+"""pico_simple_telemetry.py
+
+A test script sending empty telemetry packets.
+
+To see this in action, you will need to set up a second Telemetry Thingamabob
+running a script like pico_simple_rx.py from the `tuppersat.rhserial` package.
+
 """
 
-
-
-"""
-
-# standarad library imports
+# standard library imports
 from time import sleep
 
 # uPython imports
 from machine import UART, Pin
 
 # tuppersat imports
-from tuppersat.radio import TupperSatRadiod
+from tuppersat.radio import TupperSatRadio
 
 # constants
 UART_ID = 1
 TX_PIN = 4
 RX_PIN = 5
-
 T3_BAUDRATE = 38400
 
+CALLSIGN = 'TESTSAT1'
+
 def loop(radio, pause=1):
+    # send a blank telemetry packet.
     print('Sending telemetry')
-    radio.send_telemetry()
+    radio.send_telemetry(
+        hhmmss     = None,
+        latitude   = None,
+        longitude  = None,
+        hdop       = None,
+        altitude   = None,
+        t_internal = None,
+        t_external = None,
+        pressure   = None,
+    )
     sleep(pause)
 
     
