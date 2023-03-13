@@ -93,7 +93,6 @@ To send telemetry and data packets, you can call the `send_telemetry` and
 The TupperSat telemetry format is prefaced by a `T` specifier, and consists of
 the following fields separated by `|`:
 
-<div align='center'>
   | Field       | Meaning                      | Type              |
   |-------------|------------------------------|-------------------|
   | callsign    | 8 letter identifier          | N/A               |
@@ -106,7 +105,6 @@ the following fields separated by `|`:
   | t_internal  | internal temperature (deg C) | float             |
   | t_external  | external temperature (deg C) | float             |
   | pressure    | pressure in millibars        | float             |
-</div>
 
 Telemetry packets can be sent by `TupperSatRadio.send_telemetry`. The first
 two fields are filled out automatically. The user must supply the remaining
@@ -171,12 +169,10 @@ Time(hour=12, minute=34, second=56, microsecond=789000)
 The TupperSat data format is prefaced by a `D` specifier and consists
 of the following fields separated by `|`:
 
-<div align='center'>
   | Field       | Meaning                      | Type              |
   |-------------|------------------------------|-------------------|
   | callsign    | 8 letter identifier          | N/A               |
   | data        | specified by user            | bytes-like        |
-</div>
 
 The `SatRadio.send_data` message is designed to handle the message formatting
 and to transmit the data object. The callsign is automatically attached and
