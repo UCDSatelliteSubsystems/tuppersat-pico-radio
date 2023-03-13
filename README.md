@@ -93,6 +93,7 @@ To send telemetry and data packets, you can call the `send_telemetry` and
 The TupperSat telemetry format is prefaced by a `T` specifier, and consists of
 the following fields separated by `|`:
 
+<div align='center'>
   | Field       | Meaning                      | Type              |
   |-------------|------------------------------|-------------------|
   | callsign    | 8 letter identifier          | N/A               |
@@ -105,6 +106,7 @@ the following fields separated by `|`:
   | t_internal  | internal temperature (deg C) | float             |
   | t_external  | external temperature (deg C) | float             |
   | pressure    | pressure in millibars        | float             |
+</div>
 
 Telemetry packets can be sent by `TupperSatRadio.send_telemetry`. The first
 two fields are filled out automatically. The user must supply the remaining
@@ -112,10 +114,8 @@ fields. A sensible way to prepare these additional fields is as items in a
 dictionary. They can then be passed to `send_telemetry` using:
 
 ```python
-from tuppersat.radio.
-
 telemetry_dict = {
-    'hhmmss'      : Time(hour=12, minute=34, second=56),
+    'hhmmss'      : Time(hour=12, minute=34, second=56, microsecond=0),
     'lat_dec_deg' : 53.3498,
     'lon_dec_deg' : -6.2603,
     # etc.
@@ -161,20 +161,22 @@ def parse_time(time_str):
 ```
 
 Example usage:
-```
+```python
 >>> parse_time('123456.789')
 Time(hour=12, minute=34, second=56, microsecond=789000)
 ```
 
 #### Data Packets
 
-The TupperSat data format is prefaced by a 'D' specifier and consists
-of the following fields separated by '|':
+The TupperSat data format is prefaced by a `D` specifier and consists
+of the following fields separated by `|`:
 
+<div align='center'>
   | Field       | Meaning                      | Type              |
   |-------------|------------------------------|-------------------|
   | callsign    | 8 letter identifier          | N/A               |
   | data        | specified by user            | bytes-like        |
+</div>
 
 The `SatRadio.send_data` message is designed to handle the message formatting
 and to transmit the data object. The callsign is automatically attached and
