@@ -22,6 +22,13 @@ def format_fixed_width(value, width, fmt_spec):
 # ****************************************************************************
 # Telemetry Packets
 
+def strftime(time):
+    hh, mm, ss = time.hour, time.minute, time.second
+    return f"{hh:0>2}{mm:0>2}{ss:0>2}"
+
+def format_fixed_width_time(time, width=6):
+    return (' '*width if time is None else strftime(time))
+
 def TelemetryPacket(callsign, index, hhmmss=None,
                     latitude=None, longitude=None, hdop=None, altitude=None,
                     t_internal=None, t_external=None, pressure=None):
@@ -31,7 +38,7 @@ def TelemetryPacket(callsign, index, hhmmss=None,
     _fields = [
         format_fixed_width(callsign  ,  8, '<8'      ),
         format_fixed_width(index     ,  5, '>05'     ),
-        format_fixed_width(hhmmss    ,  6, '%H%M%S'  ),
+        format_fixed_width_time(hhmmss,  6),
         format_fixed_width(latitude  ,  9, '+09.05f' ),
         format_fixed_width(longitude , 10, '+010.05f'),
         format_fixed_width(hdop      ,  5, '05.02f'  ), 
