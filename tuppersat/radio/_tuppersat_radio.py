@@ -18,7 +18,9 @@ from ._packet_utils import TelemetryPacket, DataPacket
 def format_callsign(callsign):
     #TODO: validate ascii characters?
     #TODO: validate length limit?
-    return callsign.ljust(8)[:8]
+#    return callsign.ljust(8)[:8]
+    callsign = callsign[:8]
+    return f"{callsign:<8}"
 
 
 class TupperSatRadio(RHSerialRadio):
@@ -29,7 +31,8 @@ class TupperSatRadio(RHSerialRadio):
         self.callsign = format_callsign(callsign)
         self.telemetry_count = Counter()
         
-        super().__init__(uart, address, user_callback)
+#        super().__init__(uart, address, user_callback)
+        super().__init__(uart, address)
 
     def send_packet(self, packet):
         """Convert pkt to bytes and transmit."""

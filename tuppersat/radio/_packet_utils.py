@@ -4,13 +4,17 @@ Simplified functions to format packets as bytes objects.
 
 """
 
+def format(value, fmtspec):
+    _s = '{:'+fmtspec+'}'
+    return _s.format(value)
 
 def format_fixed_width(value, width, fmt_spec):
     """Returns fixed width string with format(value, fmt_spec)."""
     try:
         _value = (format(value, fmt_spec) if value is not None else '')
     except ValueError as e:
-        msg = f"Invalid format specifier {fmt_spec!r} for value {value!r}"
+        _rfmt_spec, _rvalue = repr(fmt_spec), repr(value) 
+        msg = f"Invalid format specifier {_rfmt_spec} for value {_rvalue}"
         raise ValueError(msg) from e
 
     return '{val:<{w}}'.format(val=_value, w=width)
@@ -37,7 +41,8 @@ def TelemetryPacket(callsign, index, hhmmss=None,
         format_fixed_width(pressure  ,  9, '09.04f'  ),
     ]
 
-    pkt_string = '|'.join(['T', *_fields])
+    _parts = '|'.join(_fields)
+    pkt_string = f'T|{_parts}'
     return pkt_string.encode('ascii')
 
 

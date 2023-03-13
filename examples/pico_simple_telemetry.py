@@ -22,6 +22,7 @@ TX_PIN = 4
 RX_PIN = 5
 T3_BAUDRATE = 38400
 
+ADDRESS = 0xfe
 CALLSIGN = 'TESTSAT1'
 
 def loop(radio, pause=1):
@@ -43,7 +44,7 @@ def loop(radio, pause=1):
 def main():
     # initialisation
     uart = UART(UART_ID, baudrate=T3_BAUDRATE, tx=Pin(TX_PIN), rx=Pin(RX_PIN))
-    radio = TupperSatRadio(uart, callsign)
+    radio = TupperSatRadio(uart, ADDRESS, CALLSIGN)
 
     # main loop
     while True:

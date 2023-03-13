@@ -25,7 +25,7 @@ class RHSerialRadio:
         self.address = address
 
         # counter object to track frames (used for msgid)
-        self.frame_count = Counter(module=0x100)
+        self.frame_count = Counter(modulo=0x100)
         
     # user interface to send messages
 
